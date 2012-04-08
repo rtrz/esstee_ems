@@ -1,0 +1,7 @@
+@media screen {
+	
+	#header_print {display:none;}
+	#header_screen {
+		background-color:#000;
+	}
+}

@@ -1,0 +1,154 @@
+a{
+	color:#1D00B0;
+	text-decoration:underline;
+}
+
+a:hover {
+	color:#0076C9;
+	text-decoration:none;
+}
+
+input,
+textarea {
+	font-family:'Helvetica Neue', Arial, 'Liberation Sans', FreeSans, sans-serif;
+}
+
+#flashMessage {
+	background: #ffcc00;
+	background-repeat: repeat-x;
+	background-image: -moz-linear-gradient(top, #FFEA00, #FFBF00);
+	background-image: -ms-linear-gradient(top, #FFEA00, #FFBF00);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#FFEA00), to(#FFBF00));
+	background-image: -webkit-linear-gradient(top, #FFEA00, #FFBF00);
+	background-image: -o-linear-gradient(top, #FFEA00, #FFBF00);
+	background-image: linear-gradient(top, #FFEA00, #FFBF00);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	margin: 10px 0 18px 0;
+	padding: 7px 14px;
+	color: #404040;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+#login input[type=password],
+#login input[type=text]{
+	padding: 2%;
+	width:98%;
+	font-size:140%;
+}
+
+#login input[type=submit] {
+	float:right;
+	font-size:140%;
+	width:25%;
+}
+
+.addEdit input[type=text],
+.addEdit input[type=number],
+.addEdit textarea {
+	width:99%;
+	padding:1%;
+	font-size:130%;
+}
+
+.addEdit table input {
+	margin:5px;
+}
+
+.addEdit input[type=submit] {
+	font-size:140%;	
+}
+
+.date label {
+	clear:both;
+}
+
+span.itemLabel {
+	font-weight:bold;
+}
+
+h3 .itemLabel{
+	font-size:30px;
+}
+
+h3 .nameLabel {
+	font-size:30px;
+}
+
+#customerAC {
+	overflow:hidden;
+}
+
+#form_layout {
+	width:290px;
+	height:190px;
+	padding:5px;
+	border:1px dotted black;
+	color:#eee;
+	font-size:12px;
+}
+
+#write_container {
+	padding-left:0px;
+}
+#write_box {
+	width:100%;
+	border:1px dotted black;
+	height:30px;
+
+}
+
+#unit_table th {
+	font-weight:bold;
+}
+
+.table_underline {
+	margin:0;
+	border-bottom:1px dotted black;
+	font-size:0.90em;
+}
+
+.view table {
+	margin-top:10px;
+}
+
+.view th {
+	font-weight:bold;
+}
+
+.view {
+	font-size:1.2em;
+}
+
+.project_link {
+	font-weight:bold;
+	font-size:120%;
+}
+
+.project_sublink {
+	font-size:80%;
+	text-decoration:none;
+}
+
+.invoice_overdue {
+	color:red;
+}
+
+#ProjectIndexForm input[type=text] {
+	width:100%;
+}
+
+.empty_span {
+	font-style:italic;
+	font-color:#999;
+}
+
+h1 span {
+	font-size:0.5em;
+}
