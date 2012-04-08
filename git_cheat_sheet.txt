@@ -1,0 +1,32 @@
+Create a git repo
+
+// In your project's directory
+git init
+git add .
+git commit -m "{your commit message}"
+
+// Push it to github
+--> create the repo on github from the web interface
+git remote add origin git@github.com:{username}/{git repo name}.git
+git push origin master
+
+// push to heroku
+heroku create
+git push heroku master
+heroku rake db:migrate
+
+// Branching and committing 
+git checkout 					//master branch
+git checkout -b {branch name X}	//new branch
+git branch //check branch status
+git status //check file status
+git commit -m "{commit message}"
+
+// Merge branch to master
+git checkout master
+git merge {branch name X}
+
+// Finally push changes to github
+git push
+git push origin master //if there's a failure
+
