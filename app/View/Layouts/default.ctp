@@ -65,16 +65,34 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<div class="clear"></div>
 		<div class="grid_12" id="nav_bar">
 			<?php
-				if($this->params['controller'] == 'projects' || $this->params['controller'] == 'invoices') {
-					echo $this->Html->link('Projects Home', array('controller' => 'projects', 'action' => 'index'));
-					echo ' | ';
-					echo $this->Html->link('New Project', array('controller' => 'projects', 'action' => 'add'));
-					echo ' | ';
-					echo $this->Html->link('Invoices', array('controller' => 'projects', 'action' => 'outstandinginvoices'));
-					echo ' | ';
-					echo $this->Html->link('Backup', array('controller' => 'projects', 'action' => 'backup'));
-					echo ' | ';
-					echo $this->Html->link('Log Out', array('controller' => 'users', 'action' => 'index'));
+				
+				if(!($this->params['controller'] == 'users' && $this->params['action'] == 'login')) {
+					$link = null;
+
+					$link = $this->Html->link('Projects', array('controller' => 'projects', 'action' => 'index'));
+					if($link)
+						echo $link . ' | ';
+						
+					$link = $this->Link->linkA(Configure::read('AUTH_ADD_PROJECTS'),'New Project', array('controller' => 'projects', 'action' => 'add'));
+					if($link)
+						echo $link . ' | ';
+						
+					$link = $this->Link->linkA(Configure::read('AUTH_READ_INVOICES'), 'Invoices', array('controller' => 'projects', 'action' => 'outstandinginvoices'));
+					if($link)
+						echo $link . ' | ';
+						
+					$link = $this->Link->linkA(Configure::read('AUTH_ACCESS_BACKUPS'), 'Backup', array('controller' => 'projects', 'action' => 'backup'));
+					if($link)
+						echo $link . ' | ';
+						
+					$link = $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin'));
+					if($link)
+						echo $link . ' | ';
+						
+					$link = $this->Html->link('Log Out', array('controller' => 'users', 'action' => 'index'));
+					if($link)
+						echo $link;
+						
 				} else {
 					//do nothing
 				}

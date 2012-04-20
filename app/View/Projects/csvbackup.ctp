@@ -5,9 +5,9 @@
 	
 	function clean($text) {
 		$ret = str_replace(',', ' ', $text); //remove commas
-		$ret = str_replace("\n", ' ', $ret); //remove new lines ('\n')
-		$ret = str_replace("\r\n", " ", $ret);
+		$ret = str_replace(array("\r\n", "\r", "\n"), null, $ret);
 		$ret = str_replace("\\n", ' ', $ret);
+		$ret = str_replace(PHP_EOL, ' ', $ret);
 		return $ret;
 	}
 	
@@ -19,7 +19,24 @@
 	header("Pragma: no-cache");
 	header("Expires: 0");
 	
-	$contents = "Customer, Job Title, Docket Year, Docket #, Customer PO, Date, Date Required, Prev. Docket Year, Prev. Docket #, Invoice #, Units of Work, Pre-Press, Stock, Press, Ink, Bindery, Shipping, Comments";
+	$contents = 'Customer,';
+	$contents .= 'Job Title,';
+	$contents .= 'Docket Year,';
+	$contents .= 'Docket #,';
+	$contents .= 'Customer PO,';
+	$contents .= 'Date,';
+	$contents .= 'Date Required,';
+	$contents .= 'Prev. Docket Year,';
+	$contents .= 'Prev. Docket #,';
+	$contents .= 'Invoice #,';
+	$contents .= 'Units of Work,';
+	$contents .= 'Pre-Press,';
+	$contents .= 'Stock,';
+	$contents .= 'Press,';
+	$contents .= 'Ink,';
+	$contents .= 'Bindery,';
+	$contents .= 'Shipping,';
+	$contents .= 'Comments';
 	$contents .= "\n";
 	//$contents .= "<br/>";
 	
@@ -40,9 +57,15 @@
 		$contents .= clean($p['invoice_number']) . ',';	//Invoice Number
 		
 		//now add units of work
-		foreach ($project['Unit'] as $unit):
-			$contents .= '(' . $unit['quantity'] . ') ' . clean($unit['description']) . ' | ';
-		endforeach;
+		for($i=0; $i<count($project['Unit']); $i++) {
+		//foreach ($project['Unit'] as $unit):
+			//$contents .= '(' . $unit['quantity'] . ') ' . clean($unit['description']) . ' | ';
+			if($i > 0) {
+				$contents .= ' | ';
+			}
+			$contents .= '(' . $project['Unit'][$i]['quantity'] . ") " . clean($project['Unit'][$i]['description']);
+		}
+		//endforeach;
 		$contents .= ',';
 		
 		//now add aspects
@@ -59,7 +82,7 @@
 		
 	endforeach;
 	
-	echo $contents;
+	//echo $contents;
 	
 	$handle = fopen('php://output', 'w+');
 	fwrite($handle,$contents);

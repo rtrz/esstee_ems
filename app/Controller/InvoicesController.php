@@ -1,7 +1,9 @@
 <?php
 class InvoicesController extends AppController {
 	public $name = 'Invoices';
-	public $helpers = array('Html', 'Form');
+	public $helpers = array('Html', 'Form', 'Link');
+	public $components = array('Authority');		
+
 	
 	function beforeFilter() {
 		if(CakeSession::check('isLoggedIn')) {
@@ -15,7 +17,13 @@ class InvoicesController extends AppController {
 		}
 	}
 	
+	public function index() {
+		$this->autoRender = false;
+		$this->redirect(array('action' => 'outstandinginvoices', 'controller' => 'projects'));
+	}
+	
 	public function details($id = null) {
+		$this->Authority->checkAuthority(Configure::read('AUTH_EDIT_INVOICES'));
 		
 		$data = $this->Invoice->find('first', array('conditions' => array('Invoice.project_id' => $id)));
 		if(!empty($data)) {

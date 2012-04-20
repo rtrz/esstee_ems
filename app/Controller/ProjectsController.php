@@ -1,7 +1,9 @@
 <?php
 class ProjectsController extends AppController {
 	public $name = 'Projects';
-	public $helpers = array('Html', 'Form');
+	public $helpers = array('Html', 'Form', 'Link');
+	public $components = array('Authority');		
+
 	
 	function beforeFilter() {
 		if(CakeSession::check('isLoggedIn')) {
@@ -17,7 +19,8 @@ class ProjectsController extends AppController {
 	
 	// Default page retrieves all projects
 	public function index() {
-		
+		$this->Authority->checkAuthority(Configure::read('AUTH_ANY_USER'));
+				
 		if(!empty($this->data)) {
 			// Search
 			
@@ -72,12 +75,15 @@ class ProjectsController extends AppController {
 	
 	// View an individual project
 	public function view($id = null) {
+		$this->Authority->checkAuthority(Configure::read('AUTH_READ_PROJECTS'));
+
 		$this->Project->id = $id;
 		$this->set('project', $this->Project->read());	
 	}
 	
 	// Add a new project
 	public function add() {
+		$this->Authority->checkAuthority(Configure::read('AUTH_ADD_PROJECTS'));
 		
 		if(empty($this->data)) {
 			//find the last docket number
@@ -112,7 +118,14 @@ class ProjectsController extends AppController {
 	}
 	
 	// Edit a project
-	public function edit($id = null) {
+	public function edit($id) {
+		$this->Authority->checkAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS'));
+
+		
+		if($id == null) {
+			$this->redirect(array('action' => 'index'));
+		}
+		
 		$this->Project->id = $id;
 		if($this->request->is('get')) {
 			$this->request->data = $this->Project->read();
@@ -172,7 +185,13 @@ class ProjectsController extends AppController {
 	
 	// Delete a project
 	public function delete($id) {
+		$this->Authority->checkAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS'));
+
 		$this->autoRender = false;
+		
+		if($id == null) {
+			$this->redirect(array('action' => 'index'));
+		}
 		
 		$this->Project->id = $id;
 		$data = $this->Project->read();
@@ -205,6 +224,8 @@ class ProjectsController extends AppController {
 		// instruction:
 		// null ->  show only unbilled invoices
 		// 'all' -> show all invoices, both billed and unbilled
+		
+		$this->Authority->checkAuthority(Configure::read('AUTH_READ_INVOICES'));
 		
 		//Get all results
 		$this->Project->order = 'Project.docket_number DESC';
@@ -273,6 +294,7 @@ class ProjectsController extends AppController {
 	}
 	
 	public function csvbackup() {
+		$this->Authority->checkAuthority(Configure::read('AUTH_ACCESS_BACKUPS'));
 		$this->layout = 'db_backup_csv';
 		
 		$this->Project->order = 'Project.docket_number ASC';
@@ -280,6 +302,7 @@ class ProjectsController extends AppController {
 	}
 	
 	public function sqlbackup() {
+		$this->Authority->checkAuthority(Configure::read('AUTH_ACCESS_BACKUPS'));
 
 		// redirect to http://[base URL]/projects//db_backup_sql.php
 		// this step serves as authentication instead of simply directing straight to
@@ -289,7 +312,7 @@ class ProjectsController extends AppController {
 	}
 	
 	public function backup() {
-		
+		$this->Authority->checkAuthority(Configure::read('AUTH_ACCESS_BACKUPS'));		
 	}
 }
 ?>

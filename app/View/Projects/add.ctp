@@ -3,7 +3,7 @@
 $(function() {
 	var uow_count = 1;
 	
-	$('#ProjectDocketNumber').attr("disabled", true); 
+	//$('#ProjectDocketNumber').attr("disabled", true); 
 
 	$("#add_uow").click(function () {
 		var html = '<tr><td width="20%"><div class="input number"><label for="Unit' + uow_count + 'Quantity">Quantity</label><input name="data[Unit][' + uow_count + '][quantity]" type="text" id="Unit' + uow_count + 'Quantity"/></div></td><td width="80%"><div class="input textarea"><label for="Unit' + uow_count + 'Description">Description</label><textarea rows="3" name="data[Unit][' + uow_count + '][description]" cols="30" rows="6" id="Unit' + uow_count + 'Description"></textarea></div></td></tr>';
@@ -63,7 +63,7 @@ $(function() {
 	
 	$('#ProjectCustomer').keyup(function (event) {
 		var currentInput = $('#ProjectCustomer').val();
-		var autoCompleteURL = 'http://localhost/esstee/projects/autocomplete/?customer=';
+		var autoCompleteURL = 'http://ems.essteegraphics.com/projects/autocomplete/?customer=';
 		
 		if(currentInput.length > 0) {
 		
