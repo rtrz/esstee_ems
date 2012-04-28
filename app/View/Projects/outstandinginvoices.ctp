@@ -23,11 +23,11 @@
 			}
 			echo 'data.setCell(' . $i . ', 2, \'' . $this->Html->link($projects[$i]['Project']['title'], array('action' => 'view', $projects[$i]['Project']['id']), $urgency_style);
 			
-			echo ' ' . $this->Html->link('edit', array('action' => 'edit', $projects[$i]['Project']['id']), array('class' => 'project_sublink'));
+			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), 'edit', array('action' => 'edit', $projects[$i]['Project']['id']), array('class' => 'project_sublink'));
 			
-			echo ' ' . $this->Html->link('delete', array('action' => 'delete', $projects[$i]['Project']['id']), array('class' => 'project_sublink'), 'Are you sure you want to delete project ' . $projects[$i]['Project']['docket_year'] . '-' . $projects[$i]['Project']['docket_number'] . '?');
+			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), 'delete', array('action' => 'delete', $projects[$i]['Project']['id']), array('class' => 'project_sublink'), 'Are you sure you want to delete project ' . $projects[$i]['Project']['docket_year'] . '-' . $projects[$i]['Project']['docket_number'] . '?');
 			
-			echo ' ' . $this->Html->link('invoice', array('action' => 'details', 'controller' => 'invoices', $projects[$i]['Project']['id']), array('class' => 'project_sublink'));
+			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_INVOICES'), 'invoice', array('action' => 'details', 'controller' => 'invoices', $projects[$i]['Project']['id']), array('class' => 'project_sublink'));
 			echo '\');'; 
 			
 			

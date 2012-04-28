@@ -25,10 +25,15 @@
 </div>
 <div class="grid_4 invoice">
 	<?php echo $this->Form->input('billing_date'); ?>
+	<br/>
+	<?php echo $this->Form->input('invoice_number', array('default' => $project['Project']['invoice_number'])); ?>
 </div>
 <div class="grid_6 invoice">
 	<?php echo $this->Form->end('Save Changes'); ?>
 	<br/>
-	<?php echo $this->Html->link('Go to Project', array('controller' => 'projects', 'action' => 'edit', $project['Invoice']['project_id'])); ?>
+	<?php
+      $action = $this->Link->HasAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS')) ? 'edit' : 'view';
+      echo $this->Html->link('Go to Project', array('controller' => 'projects', 'action' => $action, $project['Invoice']['project_id'])); 
+    ?>
 </div>
 

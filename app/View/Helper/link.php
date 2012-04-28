@@ -18,5 +18,16 @@
 				return $this->Html->link($title, $url, $options, $confirmMessage);
 			}
 		}
+		
+		function HasAuthority($reqAuth) {
+    		// Simply returns True or False if the user has the required authority level
+    		if(!CakeSession::check('authority')) {
+				return false;
+			}
+		
+			$myAuth = CakeSession::read('authority'); 
+		
+			return !(($myAuth & $reqAuth) == 0);
+		}
 	}
 ?>

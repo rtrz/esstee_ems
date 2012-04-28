@@ -32,13 +32,20 @@ class InvoicesController extends AppController {
 	
 				$this->Invoice->id = $data['Invoice']['id'];
 				$this->request->data = $this->Invoice->read();
+				
 				$data = $this->request->data;
 				$this->set('project', $data);
 			} else {
 				// Save the data
 				$this->Invoice->id = $data['Invoice']['id'];
+								
+				$invoiceNumber = $this->request->data['Invoice']['invoice_number'];				
+				unset($this->request->data['Invoice']['invoice_number']);
 				
-				if($this->Invoice->save($this->request->data)) {
+				$this->Invoice->Project->id = $id;
+				
+				if(	$this->Invoice->save($this->request->data) &&
+					$this->Invoice->Project->saveField('invoice_number', $invoiceNumber) ) {
 					$this->Session->setFlash('Invoice has been updated.');
 				} else {
 					$this->Session->setFlash('Unable to update the invoice.');

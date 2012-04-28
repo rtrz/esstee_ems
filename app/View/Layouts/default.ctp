@@ -85,7 +85,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					if($link)
 						echo $link . ' | ';
 						
-					$link = $this->Html->link('Users', array('controller' => 'users', 'action' => 'admin'));
+					$link = $this->Html->link('Account Settings', array('controller' => 'users', 'action' => 'admin'));
 					if($link)
 						echo $link . ' | ';
 						

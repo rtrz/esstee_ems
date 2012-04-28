@@ -5,7 +5,7 @@
 	echo $this->Form->input('password');
 
 	$radio_options = array(	'511'=>'Administrator<br />',
-							'17'=> 'Reception: Read-only dockets and invoices<br />',
+							'51'=> 'Reception: Read-only dockets and invoices<br />',
 							'7' => 'User+: Read and add dockets, but no editing<br />',
 							'3' => 'User: Read dockets<br />' );
 

@@ -22,7 +22,7 @@
 			common examples:
 			15				  0
 			0000 0001 1111 1111 = 511	admin: they can do everything
-			0000 0000 0001 0001 = 17	receptionist: read projects, read invoices
+			0000 0000 0001 0011 = 19	receptionist: read projects, read invoices
 			0000 0000 0000 0111 = 7		basic users+: can add and read projects
 			0000 0000 0000 0011 = 3		basic users: can only read projects
 			0000 0000 0000 0001 = 1		logged in: any user, as long as they're logged in

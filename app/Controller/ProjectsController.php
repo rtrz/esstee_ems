@@ -140,8 +140,6 @@ class ProjectsController extends AppController {
 			foreach($this->request->data['Aspect'] as $aspect):
 				$aspect['description'] = str_replace('\n', "\n", $aspect['description']);
 			endforeach;
-			$this->request->data['Project']['description'] = 
-					str_replace('\n', "\n", $this->request->data['Project']['description']);
 			$this->request->data['Project']['address'] = 
 					str_replace('\n', "\n", $this->request->data['Project']['address']);
 			$this->request->data['Project']['shipping_address'] = 

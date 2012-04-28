@@ -19,7 +19,7 @@
 				case 511:
 					$authority = 'Administrator';
 					break;
-				case 17:
+				case 51:
 					$authority = 'Reception';
 					break;
 				case 7:
