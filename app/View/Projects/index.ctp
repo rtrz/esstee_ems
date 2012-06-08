@@ -5,11 +5,11 @@
     google.setOnLoadCallback(drawTable);
     function drawTable() {
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Docket #');
+      data.addColumn('number', 'Docket');
 	  data.addColumn('string', 'Customer');
       data.addColumn('string', 'Description');
       <?php if($this->Link->HasAuthority(Configure::read('AUTH_READ_INVOICES'))) { ?>
-     	  data.addColumn('boolean', 'Invoiced');
+     	  data.addColumn('boolean', 'Inv.');
       <?php } ?>
  	  data.addRows(<?php echo count($projects); ?>);
 	

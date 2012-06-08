@@ -126,7 +126,7 @@ $(function() {
 		<tr><td>Docket Year</td><td>Docket #</td></tr>
 		<?php
 			echo '<tr><td width="30%">';	
-			$years = array('10' => '2010', '11' => '2011', '12' => '2012', '13' => '2013', '14' => '2014', '15' => '2015');
+			$years = array('7' => '2007', '8' => '2008', '9' => '2009', '10' => '2010', '11' => '2011', '12' => '2012', '13' => '2013', '14' => '2014', '15' => '2015');
 			echo $this->Form->select('docket_year', $years, array('label'=>false, 'default' => date('y')));
 			echo '</td><td width="30%">';
 			echo $this->Form->input('docket_number', array('label'=>false, 'type' => 'text'));
