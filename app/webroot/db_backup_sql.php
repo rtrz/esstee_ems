@@ -2,7 +2,10 @@
 
 ob_start();
 
-if($_GET['auth'] != date(Ymd)) {
+// REVERT TO OLD AUTH FORMAT ----
+//				|
+//				V
+if($_GET['auth'] != date(YYmmdd)) {
 	header('Location: http://' . $_SERVER['SERVER_NAME']);
 }
 
