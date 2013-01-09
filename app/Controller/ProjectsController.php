@@ -67,8 +67,9 @@ class ProjectsController extends AppController {
 			
 		} else {
 			//Show all results
-			$this->	Project->order = 'Project.docket_number DESC';
-			$this->set('projects', $this->Project->find('all'));
+			//$this->	Project->order = 'Project.docket_number DESC';
+			$this->Project->order = array('Project.docket_year DESC','Project.docket_number DESC');
+            $this->set('projects', $this->Project->find('all'));
 			$this->set('searchResults', false);
 		}
 	}
@@ -226,8 +227,9 @@ class ProjectsController extends AppController {
 		$this->Authority->checkAuthority(Configure::read('AUTH_READ_INVOICES'));
 		
 		//Get all results
-		$this->Project->order = 'Project.docket_number DESC';
-		$projects = $this->Project->find('all');
+		//$this->Project->order = 'Project.docket_number DESC';
+		$this->Project->order = array('Project.docket_year DESC','Project.docket_number DESC');
+        $projects = $this->Project->find('all');
 		$alert = false;
 		
 		$under30billed = 0;
