@@ -69,7 +69,8 @@ class ProjectsController extends AppController {
 			//Show all results
 			//$this->	Project->order = 'Project.docket_number DESC';
 			$this->Project->order = array('Project.docket_year DESC','Project.docket_number DESC');
-            $this->set('projects', $this->Project->find('all'));
+            $this->set('projects', $this->Project->find('all', array('recursive' => false,
+'fields' => array('Project.id','Project.docket_number', 'Project.docket_year', 'Project.customer', 'Project.title','Invoice.is_billed'))));
 			$this->set('searchResults', false);
 		}
 	}
@@ -229,7 +230,9 @@ class ProjectsController extends AppController {
 		//Get all results
 		//$this->Project->order = 'Project.docket_number DESC';
 		$this->Project->order = array('Project.docket_year DESC','Project.docket_number DESC');
-        $projects = $this->Project->find('all');
+        $projects = $this->Project->find('all', array(
+					'recursive' => false,
+					'fields' => array('Project.id','Project.docket_number', 'Project.docket_year', 'Project.customer', 'Project.title','Project.date_required','Invoice.is_billed')));
 		$alert = false;
 		
 		$under30billed = 0;

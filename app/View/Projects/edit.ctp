@@ -11,9 +11,14 @@ $(function() {
 	
 	//disable autocomplete from browsers
 	$('input[type=text]').attr("autocomplete","off");
+	
+	$('.submit input').click(function () { 
+		$('#overlay').fadeIn(300); //disable the form
+	});
 
 });
 </script>
+	<div id="overlay" style="display:none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color:#000; opacity: .50; z-index: 9999999; color:#FFF">&nbsp;<b>saving...</b></div>
 	<div class="grid_12 addEdit">
 		<h1>Edit Project</h1>
 	</div>

@@ -43,6 +43,10 @@ $(function() {
 			retVal = false;
 		}
 		
+		if(retVal) {
+			$('#overlay').fadeIn(300); //disable the form
+		}
+		
 		return retVal;
 	});
 	
@@ -94,6 +98,7 @@ $(function() {
 	$('input[type=text]').attr("autocomplete","off");
 });
 </script>
+<div id="overlay" style="display:none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background-color:#000; opacity: .50; z-index: 9999999; color:#FFF">&nbsp;<b>saving...</b></div>
 <div class="grid_12 addEdit">
 	<h1>New Project</h1>
 </div>
