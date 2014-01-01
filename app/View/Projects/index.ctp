@@ -8,27 +8,31 @@
       data.addColumn('number', 'Docket');
 	  data.addColumn('string', 'Customer');
       data.addColumn('string', 'Description');
-      <?php if($this->Link->HasAuthority(Configure::read('AUTH_READ_INVOICES'))) { ?>
-     	  data.addColumn('boolean', 'Inv.');
+      <?php if($this->Link->HasAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS'))) { ?>
+     	  data.addColumn('string', 'Ship');
       <?php } ?>
  	  data.addRows(<?php echo count($projects); ?>);
 	
 	<?php for($i=0; $i < count($projects); $i++) {		
 		 	echo 'data.setCell(' . $i . ', 0, ' . $projects[$i]['Project']['docket_number'] . ', \'' . $projects[$i]['Project']['docket_year'] . '-' . $projects[$i]['Project']['docket_number'] . '\');';
 		    echo 'data.setCell(' . $i . ', 1, \'' . $projects[$i]['Project']['customer'] . '\');';
-			echo 'data.setCell(' . $i . ', 2, \'' . $this->Html->link($projects[$i]['Project']['title'], array('action' => 'view', $projects[$i]['Project']['id']), array('class' => 'project_link'));
+            $project_link_style = null;
+            if($projects[$i]['Project']['is_shipped'] == 1) {
+                $project_link_style = array('class' => 'project_link');
+            } else {
+                $project_link_style = array('class' => 'project_link project_not_shipped');
+            }
+			echo 'data.setCell(' . $i . ', 2, \'' . $this->Html->link($projects[$i]['Project']['title'], array('action' => 'view', $projects[$i]['Project']['id']), $project_link_style);
 			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), 'edit', array('action' => 'edit', $projects[$i]['Project']['id']));
 			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), 'delete', array('action' => 'delete', $projects[$i]['Project']['id']), null, 'Are you sure you want to delete project ' . $projects[$i]['Project']['docket_year'] . '-' . $projects[$i]['Project']['docket_number'] . '?');
 			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_INVOICES'), 'invoice', array('action' => 'details', 'controller' => 'invoices', $projects[$i]['Project']['id']));
 			echo '\');'; 
 			
-			if($this->Link->HasAuthority(Configure::read('AUTH_READ_INVOICES'))) { 
-    			if($projects[$i]['Invoice']['is_billed'] == 1) { 
-    				echo 'data.setCell(' . $i . ', 3, true);';
-    			} else {
-    				echo 'data.setCell(' . $i . ', 3, false);';
-    			}
-			}
+            if($projects[$i]['Project']['is_shipped'] == 1) { 
+                echo 'data.setCell(' . $i . ', 3, \'1\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&#x2713;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+            } else {
+                echo 'data.setCell(' . $i . ', 3, \'0\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&#x2717;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+            }
 	  }
 	?> 
 

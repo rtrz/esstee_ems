@@ -70,7 +70,7 @@ class ProjectsController extends AppController {
 			//$this->	Project->order = 'Project.docket_number DESC';
 			$this->Project->order = array('Project.docket_year DESC','Project.docket_number DESC');
             $this->set('projects', $this->Project->find('all', array('recursive' => false,
-'fields' => array('Project.id','Project.docket_number', 'Project.docket_year', 'Project.customer', 'Project.title','Invoice.is_billed'))));
+'fields' => array('Project.id','Project.docket_number', 'Project.docket_year', 'Project.customer', 'Project.title','Project.is_shipped'))));
 			$this->set('searchResults', false);
 		}
 	}
@@ -205,6 +205,26 @@ class ProjectsController extends AppController {
 		$this->Session->setFlash('Project ' . $data['Project']['docket_year'] . '-' . $data['Project']['docket_number'] . ' has been deleted.');	
 		$this->redirect(array('action'=>'index'));
 	}
+
+    // Mark a project as shipped/not shipped (toggle).
+    public function ship($id) {
+		$this->Authority->checkAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS'));
+
+        $this->autoRender = false;
+
+        if($id != null) {
+            $this->Project->id = $id;
+            $project = $this->Project->read();
+
+            // Toggle the value.
+            $is_shipped = ($project['Project']['is_shipped'] == 0);
+
+            $this->Project->set('is_shipped', $is_shipped);
+            $this->Project->save();
+        }
+
+		$this->redirect(array('action'=>'index'));
+    }
 	
 	public function autocomplete() {
 		$this->layout = 'json';

@@ -131,6 +131,23 @@ h3 .nameLabel {
 	font-size:120%;
 }
 
+.project_not_shipped {
+    color:red;
+}
+
+.project_shipped_link {
+    font-size:125%;
+    font-weight:bold;
+    text-align:center;
+}
+.project_shipped_link a{
+    text-decoration:none;
+}
+
+.project_shipped_link a:hover{
+    text-decoration:underline;
+}
+
 .project_sublink {
 	font-size:80%;
 	text-decoration:none;
