@@ -105,6 +105,7 @@ class ProjectsController extends AppController {
 			if($this->request->is('post')) {
 				
 				$this->request->data['Project']['timestamp'] = date('Y-m-d H:i:s');
+                $this->request->data['Project']['is_shipped'] = 0;
 				$this->request->data['Invoice']['project_id'] = $id;
 				$this->request->data['Invoice']['billing_date'] = null;
 				$this->request->data['Invoice']['is_billed'] = 0;

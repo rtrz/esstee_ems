@@ -136,9 +136,9 @@ h3 .nameLabel {
 }
 
 .project_shipped_link {
-    font-size:125%;
-    font-weight:bold;
+    font-size:150%;
     text-align:center;
+    line-height:90%;
 }
 .project_shipped_link a{
     text-decoration:none;
