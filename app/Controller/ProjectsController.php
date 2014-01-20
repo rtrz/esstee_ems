@@ -317,12 +317,15 @@ class ProjectsController extends AppController {
 		}
 	}
 	
-	public function csvbackup() {
+	public function csvbackup($year = null) {
 		$this->Authority->checkAuthority(Configure::read('AUTH_ACCESS_BACKUPS'));
 		$this->layout = 'db_backup_csv';
 		
 		$this->Project->order = 'Project.docket_number ASC';
-		$this->set('projects', $this->Project->find('all'));
+
+        // Subtract 2000 for the docket_year column. For example, 2013 is stored as 13.
+		$this->set('projects', $this->Project->find('all', array('conditions' => array('Project.docket_year' => ($year - 2000)))));
+        $this->set('year', $year);
 	}
 	
 	public function sqlbackup() {

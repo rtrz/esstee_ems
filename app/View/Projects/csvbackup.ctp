@@ -13,7 +13,7 @@
 	
 	//$filename = 'db-backup-'. date('Y-m-d_H:i:s') .'.csv';	//with time of day
 	
-	$filename = 'db-backup-'. date('Y-m-d') .'.csv';			//without time of day
+	$filename = 'db-backup-'. date('Y-m-d') . '_' . $year .'.csv';			//without time of day
 	header('Content-Type: text/csv; charset=utf-8');
 	header('Content-Disposition: attachment; filename=' . $filename);
 	header("Pragma: no-cache");
