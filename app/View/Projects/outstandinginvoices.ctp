@@ -8,7 +8,7 @@
       data.addColumn('number', 'Docket #');
 	  data.addColumn('string', 'Customer');
       data.addColumn('string', 'Description');
-	  data.addColumn('boolean', 'Invoiced');
+	  data.addColumn('string', 'Invoiced');
 	  data.addColumn('number', 'Elapsed Days');
  	  data.addRows(<?php echo count($projects); ?>);
 	
@@ -32,9 +32,9 @@
 			
 			
 			if($projects[$i]['Invoice']['is_billed'] == 1) { 
-				echo 'data.setCell(' . $i . ', 3, true);';
+				echo 'data.setCell(' . $i . ', 3, \'1\', \'&diams;\');';
 			} else {
-				echo 'data.setCell(' . $i . ', 3, false);';
+				echo 'data.setCell(' . $i . ', 3, \'0\', \'&times;\');';
 			}
 			
 			echo 'data.setCell(' . $i . ',4, ' . $projects[$i]['Invoice']['days_elapsed'] . ');';

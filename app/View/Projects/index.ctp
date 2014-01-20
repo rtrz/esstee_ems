@@ -27,11 +27,21 @@
 			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), 'delete', array('action' => 'delete', $projects[$i]['Project']['id']), null, 'Are you sure you want to delete project ' . $projects[$i]['Project']['docket_year'] . '-' . $projects[$i]['Project']['docket_number'] . '?');
 			echo ' ' . $this->Link->linkA(Configure::read('AUTH_EDIT_INVOICES'), 'invoice', array('action' => 'details', 'controller' => 'invoices', $projects[$i]['Project']['id']));
 			echo '\');'; 
-			
-            if($projects[$i]['Project']['is_shipped'] == 1) { 
-                echo 'data.setCell(' . $i . ', 3, \'1\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&diams;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+
+            if($this->Link->HasAuthority(Configure::read('AUTH_EDIT_DELETE_PROJECTS'))) {            
+                // If the user has the ability to edit projects, make the shipped link clickable (i.e. able to be toggled).
+                if($projects[$i]['Project']['is_shipped'] == 1) { 
+                    echo 'data.setCell(' . $i . ', 3, \'1\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&diams;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+                } else {
+                    echo 'data.setCell(' . $i . ', 3, \'0\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&times;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+                }
             } else {
-                echo 'data.setCell(' . $i . ', 3, \'0\',\'' . $this->Link->linkA(Configure::read('AUTH_EDIT_DELETE_PROJECTS'), '&times;', array('action' => 'ship', $projects[$i]['Project']['id']), array('escape' => false)) . '\', {\'className\': \'project_shipped_link\'});';
+                 // Otherwise, just display the shipping status.
+                if($projects[$i]['Project']['is_shipped'] == 1) { 
+                    echo 'data.setCell(' . $i . ', 3, \'1\',\'&diams;\', {\'className\': \'project_shipped_link\'});';
+                } else {
+                    echo 'data.setCell(' . $i . ', 3, \'0\',\'&times;\', {\'className\': \'project_shipped_link\'});';
+                }
             }
 	  }
 	?> 
